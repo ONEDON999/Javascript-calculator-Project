@@ -1,12 +1,10 @@
 let trailingResults=0;
 let operation= ['divide','multiply','subtract','add'];
 let workingOperation="";
-
+<!--this function display the results -->
 function updateDisplay(input){
     let display =document.getElementById("display");
     let secondaryDisplay=document.getElementById("secondaryDisplay");
-
-   
 
     if(display.innerHTML === "0" && operation.indexOf(input) === -1){
         if(input === 'decimal'){
@@ -22,8 +20,7 @@ function updateDisplay(input){
        }
        
     }else if(operation.indexOf(input) >=0){
-      //  console.log("dealing with an operation");
-
+ 
         if (trailingResults === display.innerHTML){
             //operand was selected twice
             workingOperation=input;
@@ -37,25 +34,28 @@ function updateDisplay(input){
             }
             else{
                 ///dealing with a set operand
+<!-- this was to see wat is going on in the console -->
                 console.log(display.innerHTML,"dealing with a set operand");
+                <!-- this is the caculation for the second time -->
                 trailingResults=calculate(trailingResults,display.innerHTML,workingOperation);
                 secondaryDisplay.innerHTML=trailingResults;
                 display.innerHTML=0;
                 workingOperation=input;
             }
     }else if(input === "equals"){
-       
+       <!-- this deals with the equal sign -->
         display.innerHTML = calculate(trailingResults, display.innerHTML, workingOperation);
         trailingResults = 0;
         workingOperation="";
         secondaryDisplay.innerHTML= trailingResults;
+        <!-- this deals with the decimal -->
     }else if(input === "decimal"){
-     //  console.log("decimal clicked")
+     //  console.log("decimal clicked") to check wat is going on in the console
         if(display.innerHTML.indexOf(".") ===-1){
             display.innerHTML += ".";
         }
     //  console.log("decimal skiped bcoz we alredy have decimal in the number");
-
+<!-- dealing the negative value (+/-) -->
    }else if(input === "negativeValue"){
     console.log("negativeValue selected");
         if( display.innerHTML.indexOf("-1") === -1 ){
